@@ -27,8 +27,6 @@ import {
 export default function Page() {
   const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
 
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-
   // This "weekdays" handler can be refactored by using useToggle hook
   const [weekdays, setWeekdays] = useLocalStorage<string[]>("weekdays", [
     "M",
