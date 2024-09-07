@@ -11,12 +11,12 @@ import {
 import { useDisclosure, useMediaQuery, useToggle } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
-import { Header } from "../components/Header";
-import ModalSetting from "../components/ModalSetting";
-import { Navbar } from "../components/Navbar";
-import { Timetable } from "../components/Timetable";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Course, Term } from "../type/Types";
+import { Header } from "@/src/components/Header";
+import ModalSetting from "@/src/components/ModalSetting";
+import { Navbar } from "@/src/components/Navbar";
+import { Timetable } from "@/src/components/TimetableLegacy";
+import { useLocalStorage } from "@/src/hooks/useLocalStorage";
+import { Course, Term } from "@/src/type/Types";
 import {
   IconBrandDiscord,
   IconBrandGithub,

@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import ModalDetail from "../ModalDetail";
+import ModalDetail from "@/src/components/ModalDetail";
 
 export function Timetable(props: {
   timetable: { [key: string]: Course[] };
