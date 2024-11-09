@@ -44,7 +44,8 @@ export function Timetable(props: {
   ];
 
   return (
-    <Stack h="100%" gap="0">
+    <Stack gap="0">
+      {/* Days (M, TU, W, [...]) */}
       <Grid gutter="0" align="stretch">
         <Grid.Col span={1}>
           <Card radius="0" withBorder p="4">
@@ -78,11 +79,18 @@ export function Timetable(props: {
         })}
       </Grid>
 
+      {/* Schedule + Courses */}
       {Array(7)
         .fill(0)
         .map((_, i) => {
           return (
-            <Grid key={scheduleItems[i][1]} gutter="0" align="stretch">
+            <Grid
+              key={scheduleItems[i][1]}
+              gutter="0"
+              align="stretch"
+              mah="max-content"
+            >
+              {/* Schedule (1 (8:50-10:00), 2 (10:10-11:20), [...]) */}
               <Grid.Col span={1}>
                 <Card radius="0" withBorder h="100%" mih="12vh" p="4">
                   <Stack align="center" justify="center" gap="0" h="100%">
@@ -96,6 +104,7 @@ export function Timetable(props: {
                   </Stack>
                 </Card>
               </Grid.Col>
+              {/* Courses */}
               {props.weekdays.map((day) => {
                 return (
                   <Grid.Col span={11 / props.weekdays.length}>
