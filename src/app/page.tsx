@@ -1,8 +1,8 @@
 "use client";
-import { AppShell } from "@mantine/core";
+import { ActionIcon, AppShell, Flex, Grid, NativeSelect } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Header } from "../components/Header";
 import ModalSetting from "../components/ModalSetting";
 import { CourseList } from "../components/CourseList";
@@ -10,6 +10,7 @@ import { Navbar } from "../components/Navbar";
 import { Timetable } from "../components/Timetable";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Course, Term } from "../type/Types";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 export default function Page() {
   const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
@@ -32,13 +33,8 @@ export default function Page() {
 
   const terms: { group: string; items: Term[] }[] = [
     {
-      group: "All",
-      items: [{ label: "All", ay: "All", season: "All", value: "All" }],
-    },
-    {
       group: "2023",
       items: [
-        { label: "2023All", ay: "2023", season: "All", value: "2023All" },
         { label: "2023S", ay: "2023", season: "Spring", value: "2023Spring" },
         { label: "2023A", ay: "2023", season: "Autumn", value: "2023Autumn" },
         { label: "2023W", ay: "2023", season: "Winter", value: "2023Winter" },
@@ -47,7 +43,6 @@ export default function Page() {
     {
       group: "2024",
       items: [
-        { label: "2024All", ay: "2024", season: "All", value: "2024All" },
         { label: "2024S", ay: "2024", season: "Spring", value: "2024Spring" },
         { label: "2024A", ay: "2024", season: "Autumn", value: "2024Autumn" },
         { label: "2024W", ay: "2024", season: "Winter", value: "2024Winter" },
@@ -56,7 +51,6 @@ export default function Page() {
     {
       group: "2025",
       items: [
-        { label: "2025All", ay: "2025", season: "All", value: "2025All" },
         { label: "2025S", ay: "2025", season: "Spring", value: "2025Spring" },
         { label: "2025A", ay: "2025", season: "Autumn", value: "2025Autumn" },
         { label: "2025W", ay: "2025", season: "Winter", value: "2025Winter" },
@@ -65,7 +59,6 @@ export default function Page() {
     {
       group: "2026",
       items: [
-        { label: "2026All", ay: "2026", season: "All", value: "2026All" },
         { label: "2026S", ay: "2026", season: "Spring", value: "2026Spring" },
         { label: "2026A", ay: "2026", season: "Autumn", value: "2026Autumn" },
         { label: "2026W", ay: "2026", season: "Winter", value: "2026Winter" },
@@ -143,9 +136,8 @@ export default function Page() {
   const timetable: { [key: string]: Course[] } = {};
   const coursesInSelectedTerm = courses.filter(
     (course) =>
-      (selectedTerm?.season === "All" ||
-        course.season === selectedTerm?.season) &&
-      (selectedTerm?.ay === "All" || course.ay.toString() === selectedTerm?.ay)
+      course.season === selectedTerm?.season &&
+      course.ay.toString() === selectedTerm?.ay
   );
 
   const enrolledCoursesInSelectedTerm = coursesInSelectedTerm.filter(
@@ -216,24 +208,17 @@ export default function Page() {
     <AppShell
       header={{ height: 60 }}
       navbar={{
-        width: "400px",
-        breakpoint: "sm",
+        width: "150",
+        breakpoint: "md",
         collapsed: { mobile: !navbarOpened },
       }}
     >
       <AppShell.Header>
         <Header
-          navbarOpened={navbarOpened}
-          toggleNavbar={() => {
-            toggleNavbar();
-          }}
           weekdays={weekdays}
           toggleSaturday={() => {
             toggleSaturday();
           }}
-          terms={terms}
-          selectedTermValue={selectedTermValue}
-          setSelectedTermValue={setSelectedTermValue}
           modalSettingOpen={modalSettingOpen}
         />
         <ModalSetting
@@ -252,41 +237,63 @@ export default function Page() {
         />
       </AppShell.Header>
       <AppShell.Navbar>
-        <Navbar
-          courses={coursesInSelectedTerm}
-          courseController={{
-            toggleIsEnrolled,
-            addCourse: addCourseAndMoveToTheTerm,
-            updateCourse,
-            deleteCourse,
-          }}
-          language={language}
-          selectedTerm={selectedTerm}
-        />
+        <Navbar />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Timetable
-          timetable={timetable}
-          enrolledCourses={enrolledCoursesInSelectedTerm}
-          courseController={{
-            toggleIsEnrolled,
-            updateCourse,
-            deleteCourse,
-          }}
-          language={language}
-          weekdays={weekdays}
-        />
-        <CourseList
-          courses={coursesInSelectedTerm}
-          courseController={{
-            toggleIsEnrolled,
-            addCourse: addCourseAndMoveToTheTerm,
-            updateCourse,
-            deleteCourse,
-          }}
-          language={language}
-          selectedTerm={selectedTerm}
-        />
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 8 }}>
+            <Flex
+              mih={50}
+              gap="md"
+              justify="center"
+              align="center"
+              direction="row"
+              wrap="wrap"
+            >
+              <ActionIcon
+                variant="default"
+                color="gray"
+                aria-label="Previous Term"
+              >
+                <IconChevronLeft />
+              </ActionIcon>
+              <NativeSelect
+                value={selectedTermValue}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+                  setSelectedTermValue(event.currentTarget.value)
+                }
+                data={terms}
+              />
+              <ActionIcon variant="default" color="gray" aria-label="Next Term">
+                <IconChevronRight />
+              </ActionIcon>
+            </Flex>
+            <Timetable
+              timetable={timetable}
+              enrolledCourses={enrolledCoursesInSelectedTerm}
+              courseController={{
+                toggleIsEnrolled,
+                updateCourse,
+                deleteCourse,
+              }}
+              language={language}
+              weekdays={weekdays}
+            />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <CourseList
+              courses={coursesInSelectedTerm}
+              courseController={{
+                toggleIsEnrolled,
+                addCourse: addCourseAndMoveToTheTerm,
+                updateCourse,
+                deleteCourse,
+              }}
+              language={language}
+              selectedTerm={selectedTerm}
+            />
+          </Grid.Col>
+        </Grid>
       </AppShell.Main>
       {/*<AppShell.Footer*/}
       {/*  withBorder={false}*/}
