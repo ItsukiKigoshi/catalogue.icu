@@ -1,28 +1,15 @@
 "use client";
-import {
-  AppShell,
-  Flex,
-  em,
-  Text,
-  Button,
-  Group,
-  ActionIcon,
-} from "@mantine/core";
-import { useDisclosure, useMediaQuery, useToggle } from "@mantine/hooks";
+import { AppShell, em } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Header } from "../components/Header";
 import ModalSetting from "../components/ModalSetting";
+import { CourseList } from "../components/CourseList";
 import { Navbar } from "../components/Navbar";
 import { Timetable } from "../components/Timetable";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Course, Term } from "../type/Types";
-import {
-  IconBrandDiscord,
-  IconBrandGithub,
-  IconCoinYen,
-  IconSend,
-} from "@tabler/icons-react";
 
 export default function Page() {
   const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
@@ -291,14 +278,23 @@ export default function Page() {
           language={language}
           weekdays={weekdays}
         />
+        <CourseList
+          courses={coursesInSelectedTerm}
+          courseController={{
+            toggleIsEnrolled,
+            addCourse: addCourseAndMoveToTheTerm,
+            updateCourse,
+            deleteCourse,
+          }}
+          language={language}
+          selectedTerm={selectedTerm}
+        />
       </AppShell.Main>
-      {/* <AppShell.Footer
-        withBorder={false}
-        h="60px"
-        style={{ background: "rgba(0,0,0,0)" }}
-      >
-     
-      </AppShell.Footer> */}
+      {/*<AppShell.Footer*/}
+      {/*  withBorder={false}*/}
+      {/*  h="60px"*/}
+      {/*>*/}
+      {/*</AppShell.Footer>*/}
     </AppShell>
   );
 }
