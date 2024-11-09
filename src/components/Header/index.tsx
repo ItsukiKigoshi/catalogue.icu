@@ -1,22 +1,9 @@
-import {
-  ActionIcon,
-  Burger,
-  ComboboxData,
-  Container,
-  Group,
-  NativeSelect,
-  Text,
-} from "@mantine/core";
+import { ActionIcon, Container, Group, Text } from "@mantine/core";
 import { IconSettings } from "@tabler/icons-react";
 
 export function Header(props: {
-  navbarOpened: boolean;
-  toggleNavbar: () => void;
   weekdays: string[];
   toggleSaturday: () => void;
-  terms: ComboboxData;
-  selectedTermValue: string;
-  setSelectedTermValue: (value: string) => void;
   modalSettingOpen: () => void;
 }) {
   return (
@@ -31,26 +18,9 @@ export function Header(props: {
         }}
       >
         <Group gap={5}>
-          <Burger
-            opened={props.navbarOpened}
-            onClick={() => {
-              props.toggleNavbar();
-            }}
-            hiddenFrom="sm"
-            size="sm"
-          />
           <Text size="lg" fw={700}>
             ICU Catalogue
           </Text>
-        </Group>
-        <Group gap={5}>
-          <NativeSelect
-            value={props.selectedTermValue}
-            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-              props.setSelectedTermValue(event.currentTarget.value)
-            }
-            data={props.terms}
-          />
         </Group>
         <Group gap={5}>
           <ActionIcon
