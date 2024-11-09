@@ -23,7 +23,7 @@ export default function CourseCard(props: {
   const [modalConfirmOpened, { open, close }] = useDisclosure(false);
 
   return (
-    <Card p={0} m="sm" withBorder>
+    <Card p={0} m={0} withBorder>
       <Grid>
         <Grid.Col span="auto">
           <UnstyledButton
@@ -31,7 +31,6 @@ export default function CourseCard(props: {
               props.open();
             }}
             key={props.course.regno}
-            w="100%"
             p="md"
           >
             <Flex gap="xs">
@@ -41,15 +40,15 @@ export default function CourseCard(props: {
                 w="2px"
                 orientation="vertical"
               />
-              <Stack h="100%" gap="sm">
-                <Text size="xs" c="dimmed">
+              <Stack gap="sm">
+                <Text size="xs" c="dimmed" lineClamp={1}>
                   {props.course.no} ･ {props.course.unit}
                 </Text>
-                <Text size="sm" lh={1}>
+                <Text size="sm" lineClamp={1}>
                   {props.language === "E" ? props.course.e : props.course.j} (
                   {props.course.lang})
                 </Text>
-                <Text size="xs" c="dimmed">
+                <Text size="xs" c="dimmed" lineClamp={1}>
                   {props.course.schedule?.map((s, i) =>
                     i === props.course.schedule!.length - 1 ? s : s + ", "
                   )}
@@ -76,6 +75,7 @@ export default function CourseCard(props: {
           </Stack>
         </Grid.Col>
       </Grid>
+
       <ModalConfirm
         title={`Are you sure to delete "${
           props.language === "E" ? props.course.e : props.course.j
