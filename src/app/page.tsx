@@ -13,7 +13,7 @@ import { Course, Term } from "../type/Types";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 export default function Page() {
-  const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
+  const [navbarOpened] = useDisclosure(false);
 
   // This "weekdays" handler can be refactored by using useToggle hook
   const [weekdays, setWeekdays] = useLocalStorage<string[]>("weekdays", [
