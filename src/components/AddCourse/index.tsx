@@ -1,5 +1,4 @@
 import { Course, Term } from "@/src/type/Types";
-import { Carousel } from "@mantine/carousel";
 import {
   ActionIcon,
   Grid,
@@ -162,34 +161,30 @@ export default function AddCourse(props: {
         size="xl"
         title="How to Add a Course"
       >
-        <Carousel slideSize="80%" slideGap="xl">
-          <Carousel.Slide>
-            <Stack>
-              <Title order={5}>
-                1. Copy Course Info from{" "}
-                <a
-                  href="https://campus.icu.ac.jp/icumap/ehb/SearchCO.aspx"
-                  target="_blank"
-                >
-                  Course Offerings
-                </a>
-              </Title>
-              <Image
-                src="/HowTo-CourseOfferings.gif"
-                alt="Copy from Course Offerings"
-              />
-            </Stack>
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Stack>
-              <Title order={5}>2. Paste Info and Press Enter!</Title>
-              <Image
-                src="/HowTo-ICUCatalogue.gif"
-                alt="Paste it to ICU Catalogue"
-              />
-            </Stack>
-          </Carousel.Slide>
-        </Carousel>
+        <Stack gap="lg">
+          <Stack>
+            <Title order={5}>
+              1. Copy Course Info from{" "}
+              <a
+                href="https://campus.icu.ac.jp/icumap/ehb/SearchCO.aspx"
+                target="_blank"
+              >
+                Course Offerings
+              </a>
+            </Title>
+            <Image
+              src="/HowTo-CourseOfferings.gif"
+              alt="Copy from Course Offerings"
+            />
+          </Stack>
+          <Stack>
+            <Title order={5}>2. Paste Info and Press Enter!</Title>
+            <Image
+              src="/HowTo-ICUCatalogue.gif"
+              alt="Paste it to ICU Catalogue"
+            />
+          </Stack>
+        </Stack>
       </Modal>
     );
   };
