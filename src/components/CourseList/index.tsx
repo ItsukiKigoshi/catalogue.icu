@@ -1,5 +1,5 @@
 "use client";
-import { ScrollArea, Stack } from "@mantine/core";
+import { ScrollArea, SimpleGrid, Stack } from "@mantine/core";
 
 import CourseCard from "@/src/components/CourseCard";
 import { Course, Term } from "@/src/type/Types";
@@ -61,18 +61,24 @@ export function CourseList(props: {
           selectedTerm={props.selectedTerm}
         />
         <ScrollArea>
-          {results}
-          <ModalDetail
-            courses={modalDetailFocusedCourse}
-            modalDetailOpened={modalDetailOpened}
-            modalDetailClose={() => {
-              modalDetailClose();
-            }}
-            courseController={props.courseController}
-            language={props.language}
-          />
+          <SimpleGrid
+            cols={{ base: 1, sm: 2, md: 1 }}
+            spacing="xs"
+            verticalSpacing="xs"
+          >
+            {results}
+          </SimpleGrid>
         </ScrollArea>
       </Stack>
+      <ModalDetail
+        courses={modalDetailFocusedCourse}
+        modalDetailOpened={modalDetailOpened}
+        modalDetailClose={() => {
+          modalDetailClose();
+        }}
+        courseController={props.courseController}
+        language={props.language}
+      />
     </>
   );
 }
