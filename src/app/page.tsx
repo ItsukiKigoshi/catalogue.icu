@@ -1,6 +1,6 @@
 "use client";
-import { AppShell, em } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { AppShell } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import { Header } from "../components/Header";
@@ -13,8 +13,6 @@ import { Course, Term } from "../type/Types";
 
 export default function Page() {
   const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
-
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
   // This "weekdays" handler can be refactored by using useToggle hook
   const [weekdays, setWeekdays] = useLocalStorage<string[]>("weekdays", [
