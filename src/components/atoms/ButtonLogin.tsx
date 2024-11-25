@@ -1,17 +1,14 @@
 import React from "react";
-import { Button } from "@mantine/core";
-import Image from "next/image";
-import { signIn, signOut } from "next-auth/react";
-import { auth } from "@/src/auth";
+import { Avatar, Button, Group } from "@mantine/core";
+import { auth, signIn, signOut } from "@/src/auth";
 
 export default async function ButtonLogin() {
   const session = await auth();
-  if (!session?.user) return null;
   return (
-    <>
+    <div>
       {session ? (
-        <>
-          <Image
+        <Group>
+          <Avatar
             src={session.user?.image ?? ""}
             alt={session.user?.name ?? ""}
           />
@@ -23,7 +20,7 @@ export default async function ButtonLogin() {
           >
             Logout
           </Button>
-        </>
+        </Group>
       ) : (
         <Button
           onClick={async () => {
@@ -34,6 +31,6 @@ export default async function ButtonLogin() {
           Login
         </Button>
       )}
-    </>
+    </div>
   );
 }
