@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import ModalDetail from "../ModalDetail";
+import ModalDetail from "./ModalDetail";
 
 export function Timetable(props: {
   timetable: { [key: string]: Course[] };
@@ -84,12 +84,7 @@ export function Timetable(props: {
         .fill(0)
         .map((_, i) => {
           return (
-            <Grid
-              key={scheduleItems[i][1]}
-              gutter="0"
-              align="stretch"
-              mah="max-content"
-            >
+            <Grid key={scheduleItems[i][1]} gutter="0" align="stretch">
               {/* Schedule (1 (8:50-10:00), 2 (10:10-11:20), [...]) */}
               <Grid.Col span={1}>
                 <Card radius="0" withBorder h="100%" mih="12vh" p="4">

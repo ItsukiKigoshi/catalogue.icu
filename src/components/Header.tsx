@@ -1,5 +1,6 @@
 import { ActionIcon, Container, Group, Text } from "@mantine/core";
 import { IconSettings } from "@tabler/icons-react";
+import ButtonLogin from "@/src/components/ButtonLogin";
 
 export function Header(props: {
   weekdays: string[];
@@ -32,6 +33,7 @@ export function Header(props: {
           >
             <IconSettings />
           </ActionIcon>
+          <ButtonLogin />
         </Group>
       </Container>
     </header>

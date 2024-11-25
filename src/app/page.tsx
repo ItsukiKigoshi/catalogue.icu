@@ -65,7 +65,7 @@ export default function Page() {
       ],
     },
   ];
-  const [selectedTermValue, setSelectedTermValue] = useState("2024Autumn");
+  const [selectedTermValue, setSelectedTermValue] = useState("2024Winter");
   const selectedTerm: Term | undefined = terms
     .map((term) => term.items)
     .flat()
@@ -240,7 +240,7 @@ export default function Page() {
         <Navbar />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Grid>
+        <Grid p={"xs"} m={0}>
           <Grid.Col span={{ base: 12, md: 8 }}>
             <Flex
               mih={50}

@@ -4,7 +4,6 @@ import {
   Alert,
   Button,
   Checkbox,
-  Flex,
   Group,
   Modal,
   SegmentedControl,
@@ -27,7 +26,7 @@ import {
 } from "@tabler/icons-react";
 import { saveAs } from "file-saver";
 import { useState } from "react";
-import ModalConfirm from "../ModalConfirm";
+import ModalConfirm from "./ModalConfirm";
 
 export default function ModalSetting(props: {
   modalSettingOpened: boolean;

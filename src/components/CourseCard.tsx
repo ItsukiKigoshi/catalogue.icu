@@ -24,8 +24,8 @@ export default function CourseCard(props: {
 
   return (
     <Card p={0} m={0} withBorder>
-      <Grid>
-        <Grid.Col span="auto">
+      <Grid justify="flex-end">
+        <Grid.Col span={10}>
           <UnstyledButton
             onClick={() => {
               props.open();
@@ -57,8 +57,10 @@ export default function CourseCard(props: {
             </Flex>
           </UnstyledButton>
         </Grid.Col>
-        <Divider orientation="vertical" my="md" mx={0} />
-        <Grid.Col span="content">
+        {/*<Grid.Col span={}>*/}
+        {/*  <Divider orientation="vertical" my="md" mx={0} />*/}
+        {/*</Grid.Col>*/}
+        <Grid.Col span={2}>
           <Stack align="center" h="100%" p="md">
             <ActionIcon
               onClick={() => {
